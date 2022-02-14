@@ -7,7 +7,7 @@ const RecipeSearchCard = ({ id, title, image }) => {
         <img src={image} className="card-img-top" alt={title} />
         <div className="card-body">
           <h5 className="card-title">{title}</h5>
-          <button className="btn btn-primary mb-2">Add to menu</button>
+          <button className="btn btn-primary">Add to menu</button>
           <button className="btn btn-warning">See More</button>
         </div>
       </div>

@@ -1,7 +1,8 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import MenuScreen from "../components/restaurant/MenuScreen";
-import SearchScreen from "../components/restaurant/SearchScreen";
+import MenuScreen from "../components/restaurant/menu/MenuScreen";
+import { RecipeScreen } from "../components/restaurant/recipe/RecipeScreen";
+import SearchScreen from "../components/restaurant/search/SearchScreen";
 
 const AuthRouter = () => {
   return (
@@ -10,6 +11,7 @@ const AuthRouter = () => {
         <Switch>
           <Route exact path="/" component={MenuScreen} />
           <Route exact path="/search" component={SearchScreen} />
+          <Route exact path="/recipe/:recipeId" component={RecipeScreen} />
           <Redirect to="/" />
         </Switch>
       </div>
