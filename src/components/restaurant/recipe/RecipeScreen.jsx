@@ -1,9 +1,11 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 // import getHeroById from "../../helpers/getHeroById";
 
 export const RecipeScreen = () => {
   const { recipeId } = useParams();
+  let history = useHistory();
 
   console.log(recipeId);
 
@@ -65,6 +67,10 @@ export const RecipeScreen = () => {
     pricePerServing,
   } = menuRecipes[0];
 
+  const handleBackPage = () => {
+    history.goBack();
+  };
+
   return (
     <div className="container">
       <div className="container row mt-5">
@@ -101,7 +107,9 @@ export const RecipeScreen = () => {
             </li>
           </ul>
 
-          <button className="btn btn-outline-info">Back</button>
+          <button onClick={handleBackPage} className="btn btn-info ms-3 mt-3">
+            Back
+          </button>
         </div>
       </div>
     </div>

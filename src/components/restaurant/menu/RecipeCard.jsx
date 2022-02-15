@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const RecipeCard = ({
   id,
@@ -24,7 +25,9 @@ export const RecipeCard = ({
             <p className="card-text">readyInMinutes: {readyInMinutes}</p>
             <p className="card-text">servings: {servings}</p>
             <p className="card-text">pricePerServing: {pricePerServing} $</p>
-            <button className="btn btn-warning me-2">See more</button>
+            <Link className="btn btn-warning me-2" to={`recipe/${id}`}>
+              See More
+            </Link>
             <button className="btn btn-danger">Delete</button>
           </div>
         </div>

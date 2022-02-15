@@ -3,11 +3,13 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import MenuScreen from "../components/restaurant/menu/MenuScreen";
 import { RecipeScreen } from "../components/restaurant/recipe/RecipeScreen";
 import SearchScreen from "../components/restaurant/search/SearchScreen";
+import { Navbar } from "../components/ui/Navbar";
 
 const AuthRouter = () => {
   return (
-    <div className="auth__main">
-      <div className="auth__box-container">
+    <>
+      <Navbar />
+      <div>
         <Switch>
           <Route exact path="/" component={MenuScreen} />
           <Route exact path="/search" component={SearchScreen} />
@@ -15,7 +17,7 @@ const AuthRouter = () => {
           <Redirect to="/" />
         </Switch>
       </div>
-    </div>
+    </>
   );
 };
 
