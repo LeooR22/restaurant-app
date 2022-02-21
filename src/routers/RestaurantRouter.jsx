@@ -12,7 +12,7 @@ const AuthRouter = () => {
       <div>
         <Switch>
           <Route exact path="/" component={MenuScreen} />
-          <Route exact path="/search" component={SearchScreen} />
+          <Route path="/search" component={SearchScreen} />
           <Route exact path="/recipe/:recipeId" component={RecipeScreen} />
           <Redirect to="/" />
         </Switch>

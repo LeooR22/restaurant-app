@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
 //reducers
+import { authReducer } from "../reducers/authReducer";
 
 //reducers
 
@@ -11,7 +12,13 @@ const composeEnhancers =
   compose;
 
 //combinereducers
+const reducers = combineReducers({
+  auth: authReducer,
+});
 
-//   const store = createStore()
+export const store = createStore(
+  reducers,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 //pendiente

@@ -1,8 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { startRegisterWithEmailPasswordName } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
 
 const RegisterScreen = () => {
+  const dispatch = useDispatch();
+
   const [formvalues, handleInputChange] = useForm({
     name: "Alkemy",
     email: "challenge@alkemy.org",
@@ -15,6 +19,7 @@ const RegisterScreen = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     console.log("Registrando...");
+    dispatch(startRegisterWithEmailPasswordName(email, password, name));
   };
 
   return (

@@ -1,11 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { startGoogleLogin, startLoginEmailPassword } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
 
 const LoginScreen = () => {
+  const dispatch = useDispatch();
+
   const [formValues, handleInputChange] = useForm({
     email: "challenge@alkemy.org",
-    password: "react",
+    password: "react1",
   });
 
   const { email, password } = formValues;
@@ -13,10 +17,11 @@ const LoginScreen = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     console.log("Login....");
+    dispatch(startLoginEmailPassword(email, password));
   };
 
   const handleGoogleLogin = () => {
-    console.log("Google Login ....");
+    dispatch(startGoogleLogin());
   };
 
   return (
