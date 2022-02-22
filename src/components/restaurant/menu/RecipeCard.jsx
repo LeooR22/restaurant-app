@@ -10,7 +10,16 @@ export const RecipeCard = ({
   readyInMinutes,
   servings,
   pricePerServing,
+  removeRecipe,
 }) => {
+  const handleDelete = () => {
+    // let menuCard = JSON.parse(window.localStorage.getItem("menuCard"));
+    // const removeRecipe = menuCard.filter((recipe) => recipe.id !== id);
+    // window.localStorage.setItem("menuCard", JSON.stringify(removeRecipe));
+    // console.log(removeRecipe);
+    removeRecipe(id);
+  };
+
   return (
     <div className="container card mb-3 w-50">
       <div className="row g-0">
@@ -28,7 +37,9 @@ export const RecipeCard = ({
             <Link className="btn btn-warning me-2" to={`recipe/${id}`}>
               See More
             </Link>
-            <button className="btn btn-danger">Delete</button>
+            <button className="btn btn-danger" onClick={handleDelete}>
+              Delete
+            </button>
           </div>
         </div>
       </div>
