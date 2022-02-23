@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useFetchMenuCard } from "../../../hooks/useFetchMenuCard";
 import { RecipeCard } from "./RecipeCard";
+import Swal from "sweetalert2";
 
 const MenuScreen = () => {
   const [menuCard, setMenuCard] = useState([]);
@@ -26,7 +27,20 @@ const MenuScreen = () => {
   }, [menuCard]);
 
   const removeRecipe = (id) => {
-    setMenuCard(menuCard.filter((recipe) => recipe.id !== id));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "The dish will be removed from the menu!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Your dish has been deleted.", "success");
+        setMenuCard(menuCard.filter((recipe) => recipe.id !== id));
+      }
+    });
   };
 
   // const menuCard = JSON.parse(window.localStorage.getItem("menuCard"));

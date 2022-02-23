@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const RecipeSearchCard = ({ id, title, image, vegan, pricePerServing }) => {
   // let menuCard = [];
@@ -13,6 +14,13 @@ const RecipeSearchCard = ({ id, title, image, vegan, pricePerServing }) => {
         },
       ];
       window.localStorage.setItem("menuCard", JSON.stringify(menuCard));
+      Swal.fire(
+        "Added !",
+        `dish ${title} has been added to the ${
+          vegan ? "vegan" : "omnivore"
+        } menu`,
+        "success"
+      );
     } else {
       let menuCard = JSON.parse(window.localStorage.getItem("menuCard"));
       let menuVegan = menuCard.filter((recipe) => recipe.vegan === true);
@@ -28,12 +36,22 @@ const RecipeSearchCard = ({ id, title, image, vegan, pricePerServing }) => {
         !(menuVegan.length < 2 && vegan === true) &&
         !(menuOmnivore.length < 2 && vegan === false)
       ) {
-        return console.log(
-          `Menu ${vegan ? "vegano" : "omnivoro"} lleno, elimine alguno del menu`
-        );
+        return Swal.fire({
+          icon: "error",
+          title: `Oops... The ${vegan ? "vegan" : "omnivore"} menu is complete`,
+          text: "if you want to change the dish, go to the beginning and delete one of the same menu",
+          footer: '<a href="">Why do I have this issue?</a>',
+        });
       }
 
       pushToMenu();
+      Swal.fire(
+        "Added !",
+        `dish ${title} has been added to the ${
+          vegan ? "vegan" : "omnivore"
+        } menu`,
+        "success"
+      );
     }
   };
 
