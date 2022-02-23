@@ -1,5 +1,5 @@
 export const getRecipeSearch = async (recipe) => {
-  const apiKey = "apiKey=b916e77f72b747e9b760f3f1f8d5b78a";
+  const apiKey = "apiKey=00fa162232574d8eb9241b99eeef3b67";
   const recipeInfo = "addRecipeInformation=true";
 
   const url = `https://api.spoonacular.com/recipes/complexSearch?${apiKey}&${recipeInfo}&query=${recipe}`;

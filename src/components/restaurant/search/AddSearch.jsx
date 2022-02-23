@@ -1,14 +1,15 @@
 import React, { useState } from "react";
+import queryString from "query-string";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
-import queryString from "query-string";
+import { useForm } from "../../../hooks/useForm";
 
-const AddSearch = ({ setRecipes }) => {
-  const { search } = useLocation();
-  const searchParams = new URLSearchParams(search);
+const AddSearch = ({ setRecipes, history }) => {
+  const location = useLocation();
+  const { q = "" } = queryString.parse(location.search);
+  console.log(q);
 
   const [inputValue, setInputValue] = useState([""]);
-  const test = searchParams.get(inputValue);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -18,18 +19,34 @@ const AddSearch = ({ setRecipes }) => {
     e.preventDefault();
     if (inputValue.trim().length > 2) {
       setRecipes(() => [inputValue]);
-      //   setInputValue("");
     }
+    console.log(inputValue);
     // history.push(`?q=${inputValue}`);
-    // console.log("submit hecho !!!");
   };
+
+  // const location = useLocation();
+  // const { q = "" } = queryString.parse(location.search);
+
+  // const [formValues, handleInputChange] = useForm({
+  //   searchText: q,
+  // });
+  // const { searchText } = formValues;
+
+  // // const heroesFiltered = useMemo(() => getHeroesByName(q), [q]);
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // history.push(`?q=${searchText}`);
+  //   console.log(q);
+  // };
+  // console.log(q);
 
   return (
     <form className="input-group mt-4" onSubmit={handleSubmit}>
       <input
         type="text"
         className="form-control"
-        name="inputValue"
+        name="searchText"
         value={inputValue}
         onChange={handleInputChange}
       ></input>

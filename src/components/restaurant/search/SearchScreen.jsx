@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import AddSearch from "./AddSearch";
 import RecipeSearch from "./RecipeSearch";
 
-const SearchScreen = () => {
+export const SearchScreen = () => {
   const [recipes, setRecipes] = useState([]);
 
   return (
@@ -92,5 +92,3 @@ const SearchScreen = () => {
 //     </>
 //   );
 // };
-
-export default SearchScreen;

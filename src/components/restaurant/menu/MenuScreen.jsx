@@ -6,14 +6,6 @@ import Swal from "sweetalert2";
 const MenuScreen = () => {
   const [menuCard, setMenuCard] = useState([]);
 
-  // if (JSON.parse(window.localStorage.getItem("menuCard")) === null) {
-  //   // setValuesCard([]);
-  //   console.log("array vacio");
-  // } else {
-  //   // setValuesCard(JSON.parse(window.localStorage.getItem("menuCard")));
-  //   console.log("array lleno");
-  // }
-
   useEffect(() => {
     console.log("Leer todos local");
     if (localStorage.getItem("menuCard")) {
