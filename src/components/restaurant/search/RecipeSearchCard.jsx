@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const RecipeSearchCard = ({ id, title, image, vegan, pricePerServing }) => {
+  // console.log(id);
   // let menuCard = [];
 
   const handleAddToMenu = () => {

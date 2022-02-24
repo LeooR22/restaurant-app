@@ -1,94 +1,69 @@
 import React, { useState } from "react";
-// import { useLocation } from "react-router-dom";
-// import queryString from "query-string";
+import queryString from "query-string";
+import { useLocation } from "react-router-dom";
+import { useForm } from "../../../hooks/useForm";
+import RecipeSearchCard from "./RecipeSearchCard";
+import { useFetchRecipes } from "../../../hooks/useFetchRecipes";
 
-// import { useForm } from "../../../hooks/useForm";
-// import RecipeSearchCard from "./RecipeSearchCard";
-// import { getRecipeSearch } from "../../../helpers/getGifs";
-// import { useFetchGifs } from "../../../hooks/useFetchGifs";
-import AddSearch from "./AddSearch";
-import RecipeSearch from "./RecipeSearch";
+export const SearchScreen = ({ history }) => {
+  const [result, setResult] = useState([]);
 
-export const SearchScreen = () => {
-  const [recipes, setRecipes] = useState([]);
+  const location = useLocation();
+  const { q = "" } = queryString.parse(location.search);
+  console.log(q);
+
+  const [formValues, handleInputChange] = useForm({
+    searchText: q,
+  });
+  const { searchText } = formValues;
+
+  const searchRecipes = useFetchRecipes(q);
+
+  const { data: recipes, loading } = searchRecipes;
+
+  console.log(recipes);
+  console.log(loading);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    history.push(`?q=${searchText}`);
+  };
+
+  console.log(searchRecipes);
 
   return (
-    <>
+    <div>
       <div className="container">
-        {/* <h2>Search Screen</h2> */}
-        <AddSearch setRecipes={setRecipes} />
-        <hr />
+        <form className="input-group mt-4" onSubmit={handleSearch}>
+          <input
+            type="text"
+            className="form-control"
+            name="searchText"
+            value={searchText}
+            onChange={handleInputChange}
+          ></input>
+          <button className="btn btn-warning" type="submit">
+            Search
+          </button>
+        </form>
 
-        <ol>
-          {recipes.map((c) => (
-            <RecipeSearch recipe={c} key={c} />
+        {q !== "" && recipes?.length === 0 && loading === false && (
+          <div className="alert alert-danger mt-2">
+            There are no plates with the name {q}
+          </div>
+        )}
+        {loading === false && (
+          <h3 className="animate__animated animate__fadeIn mt-3">{q}</h3>
+        )}
+        {loading && (
+          <p className="animate__animated animate__flash mt-2">Loading...</p>
+        )}
+        <div className=" row row-cols-1 row-cols-md-5 g-4 mt-2">
+          {recipes.map((recipe) => (
+            <RecipeSearchCard key={recipe.id} {...recipe} />
           ))}
-        </ol>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
-
-// const SearchScreen = ({ history }) => {
-//   const location = useLocation();
-//   const { q = "" } = queryString.parse(location.search);
-
-//   //TEST
-
-//   //TEST
-
-//   const [formValues, handleInputChange] = useForm({
-//     searchText: q,
-//   });
-
-//   //TEST
-
-//   //TEST
-
-//   const { searchText } = formValues;
-
-//   const { data: recipes, loading } = useFetchGifs(searchText);
-
-//   console.log("me estoy disparando");
-
-//   const handleSearch = (e) => {
-//     e.preventDefault();
-//     history.push(`?q=${searchText}`);
-//   };
-
-//   console.log(recipes);
-//   console.log(loading);
-
-//   return (
-//     <>
-//       <div className="container">
-//         <form className="input-group mb-3 mt-4">
-//           <input
-//             type="text"
-//             className="form-control"
-//             placeholder="Recipe"
-//             aria-label="Recipe"
-//             aria-describedby="button-addon2"
-//             name="searchText"
-//             value={searchText}
-//             onChange={handleInputChange}
-//           />
-//           <button
-//             className="btn btn-warning"
-//             type="submit"
-//             onClick={handleSearch}
-//           >
-//             Button
-//           </button>
-//         </form>
-//         <hr />
-
-//         <div className="row row-cols-1 row-cols-md-5 g-4">
-//           {recipes.map((recipe) => (
-//             <RecipeSearchCard key={recipe.id} {...recipe} />
-//           ))}
-//         </div>
-//       </div>
-//     </>
-//   );
-// };

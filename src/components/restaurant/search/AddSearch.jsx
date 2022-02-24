@@ -9,19 +9,25 @@ const AddSearch = ({ setRecipes, history }) => {
   const { q = "" } = queryString.parse(location.search);
   console.log(q);
 
-  const [inputValue, setInputValue] = useState([""]);
+  // const [inputValue, setInputValue] = useState("");
+  //  TEST
+  const [formValues, handleInputChange] = useForm({
+    searchText: q,
+  });
+  const { searchText } = formValues;
+  //  TEST
 
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
+  // const handleInputChange = (e) => {
+  //   setInputValue(e.target.value);
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputValue.trim().length > 2) {
-      setRecipes(() => [inputValue]);
+    if (searchText.trim().length > 2) {
+      setRecipes(() => [searchText]);
+      // history.push(`?q=${searchText}`);
     }
-    console.log(inputValue);
-    // history.push(`?q=${inputValue}`);
+    console.log(searchText);
   };
 
   // const location = useLocation();
@@ -47,7 +53,7 @@ const AddSearch = ({ setRecipes, history }) => {
         type="text"
         className="form-control"
         name="searchText"
-        value={inputValue}
+        value={searchText}
         onChange={handleInputChange}
       ></input>
       <button className="btn btn-warning" type="submit">
