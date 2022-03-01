@@ -21,7 +21,7 @@ export const RecipeCard = ({
   };
 
   return (
-    <div className="container card mb-3 w-50">
+    <div className="container card mb-3 w-50 animate__animated animate__fadeIn">
       <div className="row g-0">
         <div className="col-md-4">
           <img src={image} className="img-fluid rounded-start" alt="..." />

@@ -2,19 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useFetchMenuCard } from "../../../hooks/useFetchMenuCard";
 import { RecipeCard } from "./RecipeCard";
 import Swal from "sweetalert2";
+import { Averages } from "./Averages";
 
 const MenuScreen = () => {
   const [menuCard, setMenuCard] = useState([]);
 
   useEffect(() => {
-    console.log("Leer todos local");
     if (localStorage.getItem("menuCard")) {
       setMenuCard(JSON.parse(localStorage.getItem("menuCard")));
     }
-  }, []);
+  }, [setMenuCard]);
 
   useEffect(() => {
-    console.log("Guardar todo local");
     localStorage.setItem("menuCard", JSON.stringify(menuCard));
   }, [menuCard]);
 
@@ -35,34 +34,42 @@ const MenuScreen = () => {
     });
   };
 
-  // const menuCard = JSON.parse(window.localStorage.getItem("menuCard"));
   let arrayIdMenuCard = menuCard?.map((obj) => obj.id);
   const idsMenuCard = arrayIdMenuCard?.join(",");
-  console.log(idsMenuCard);
   const { data: menuRecipes, loading } = useFetchMenuCard(idsMenuCard);
-
-  // console.log(menuRecipes);
+  const { code, message } = menuRecipes;
 
   return (
     <>
-      <h1>Menu Screen</h1>
+      <h1>Menu</h1>
       <hr />
-
-      {menuRecipes.length > 0 ? "True" : "false "}
-
-      {menuRecipes.length > 0
-        ? menuRecipes?.map((recipe) => (
-            <RecipeCard
-              removeRecipe={removeRecipe}
-              key={recipe.id}
-              {...recipe}
-            />
-          ))
-        : "Menu vacio, por favor agregue platos al menu"}
-
-      {/* {menuRecipes?.map((recipe) => (
-        <RecipeCard key={recipe.id} {...recipe} />
-      ))} */}
+      <div className="d-flex justify-content-evenly">
+        <div className="card">
+          <h1></h1>
+          <Averages menuRecipes={menuRecipes} />
+        </div>
+        <div className="card">
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <div>
+              {menuRecipes.length > 0 ? (
+                <div className="">
+                  {menuRecipes?.map((recipe) => (
+                    <RecipeCard
+                      removeRecipe={removeRecipe}
+                      key={recipe.id}
+                      {...recipe}
+                    />
+                  ))}
+                </div>
+              ) : (
+                "Menu vacio, por favor agregue platos al menu"
+              )}
+            </div>
+          )}
+        </div>
+      </div>
     </>
   );
 };

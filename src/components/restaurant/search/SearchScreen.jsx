@@ -60,7 +60,7 @@ export const SearchScreen = ({ history }) => {
           <p className="animate__animated animate__flash mt-2">Loading...</p>
         )}
         <div className=" row row-cols-1 row-cols-md-5 g-4 mt-2">
-          {recipes.map((recipe) => (
+          {recipes?.map((recipe) => (
             <RecipeSearchCard key={recipe.id} {...recipe} />
           ))}
         </div>

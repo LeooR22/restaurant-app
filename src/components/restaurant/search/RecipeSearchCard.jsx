@@ -57,7 +57,7 @@ const RecipeSearchCard = ({ id, title, image, vegan, pricePerServing }) => {
   };
 
   return (
-    <div className="col">
+    <div className="col animate__animated animate__fadeIn">
       <div className="card h-100">
         <img src={image} className="card-img-top" alt={title} />
         <div className="card-body">

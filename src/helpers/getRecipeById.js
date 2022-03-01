@@ -1,5 +1,5 @@
 export const getRecipeById = async (id) => {
-  const apiKey = "apiKey=434f0e3b404445f6969b38591cf2e3e5";
+  const apiKey = "apiKey=eb1f38574dd64252b9cf5a37adc66b66";
 
   const url = `https://api.spoonacular.com/recipes/${id}/information?${apiKey}`;
 
