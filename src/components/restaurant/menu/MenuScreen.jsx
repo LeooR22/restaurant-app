@@ -38,7 +38,7 @@ const MenuScreen = () => {
             <Loading />
           ) : (
             <div>
-              {menuRecipes.length > 0 ? (
+              {menuRecipes?.length > 0 ? (
                 <div className="row row-cols-2 row-cols-md-2 g-5">
                   {menuRecipes?.map((recipe) => (
                     <div key={recipe.id}>
@@ -50,7 +50,7 @@ const MenuScreen = () => {
                         >
                           See
                           <br />
-                          Steps
+                          Ingredients
                         </Link>
                         <button
                           onClick={() =>

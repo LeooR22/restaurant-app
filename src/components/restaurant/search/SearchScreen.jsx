@@ -70,7 +70,7 @@ export const SearchScreen = ({ history }) => {
                 >
                   See
                   <br />
-                  Steps
+                  Ingredients
                 </Link>
                 <button
                   onClick={() => handleAddToMenu(recipe.id, recipe)}
