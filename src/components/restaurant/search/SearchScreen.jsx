@@ -37,7 +37,10 @@ export const SearchScreen = ({ history }) => {
   return (
     <div>
       <div className="container">
-        <form className="input-group mt-4" onSubmit={handleSearch}>
+        <form
+          className="input-group mt-4 animate__animated animate__pulse"
+          onSubmit={handleSearch}
+        >
           <input
             type="text"
             className="form-control"
@@ -51,7 +54,7 @@ export const SearchScreen = ({ history }) => {
         </form>
 
         {q !== "" && recipes?.length === 0 && loading === false && (
-          <div className="alert alert-danger mt-2">
+          <div className="alert alert-danger mt-2 animate__animated animate__fadeIn">
             There are no plates with the name {q}
           </div>
         )}
@@ -59,9 +62,9 @@ export const SearchScreen = ({ history }) => {
           <h3 className="animate__animated animate__fadeIn mt-3 mb-4">{q}</h3>
         )}
         {loading && <Loading />}
-        <div className=" row row-cols-1 row-cols-md-4 g-5 ">
+        <div className=" row row-cols-1 row-cols-md-4 g-5  mt-2  ">
           {recipes?.map((recipe) => (
-            <div key={recipe.id}>
+            <div key={recipe.id} className="animate__animated animate__fadeIn">
               <RecipeCard key={recipe.id} {...recipe} />
               <div className="mt-3">
                 <Link

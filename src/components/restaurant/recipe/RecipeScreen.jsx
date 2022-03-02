@@ -26,13 +26,25 @@ export const RecipeScreen = () => {
         <Loading />
       ) : (
         <div>
+          <div className="d-flex justify-content-center">
+            <button
+              onClick={handleBackPage}
+              className="btn btn-info mt-3 mb-4 w-25 animate__animated animate__fadeInLeft "
+            >
+              Back
+            </button>
+          </div>
           <div className="container d-flex justify-content-center">
-            <img src={url} alt={recipeId} className="img-fluid w-75" />
+            <img
+              src={url}
+              alt={recipeId}
+              className="img-fluid w-75 animate__animated animate__slideInLeft"
+            />
           </div>
           <div className="d-flex justify-content-center">
             <button
               onClick={handleBackPage}
-              className="btn btn-info mt-3 mb-4 w-25 "
+              className="btn btn-info mt-3 mb-4 w-25 animate__animated animate__fadeInUpBig "
             >
               Back
             </button>

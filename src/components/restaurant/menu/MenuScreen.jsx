@@ -30,7 +30,13 @@ const MenuScreen = () => {
       <div className="mt-5 d-flex justify-content-evenly">
         <div className=" w-25">
           <div>
-            {loading ? <Loading /> : <AveragesCard menuRecipes={menuRecipes} />}
+            {loading ? (
+              <Loading />
+            ) : (
+              <div className="animate__animated animate__fadeInLeft">
+                <AveragesCard menuRecipes={menuRecipes} />
+              </div>
+            )}
           </div>
         </div>
         <div className=" w-50">
@@ -41,7 +47,10 @@ const MenuScreen = () => {
               {menuRecipes?.length > 0 ? (
                 <div className="row row-cols-2 row-cols-md-2 g-5">
                   {menuRecipes?.map((recipe) => (
-                    <div key={recipe.id}>
+                    <div
+                      key={recipe.id}
+                      className="animate__animated animate__fadeIn"
+                    >
                       <RecipeCard key={recipe.id} {...recipe} />
                       <div className="mt-3">
                         <Link

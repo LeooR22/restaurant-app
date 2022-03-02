@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 export const getMenuCard = async (ids) => {
-  const apiKey = "apiKey=f2b26eca5f254254a8237e8785fc4bc0";
+  const apiKey = "apiKey=582558b5c3e94aaeb50d10835f34f4b3";
   const includeNutrition = "includeNutrition=true";
 
   const url = `https://api.spoonacular.com/recipes/informationBulk?ids=${ids}&${includeNutrition}&${apiKey}`;

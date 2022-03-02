@@ -19,7 +19,7 @@ export const RecipeCard = ({
 
   return (
     <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-      <div className="card h-100">
+      <div className="card h-100 ">
         <img
           src={image}
           className="card-img-top"

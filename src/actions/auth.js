@@ -1,9 +1,12 @@
+import Swal from "sweetalert2";
+
 import { firebase, googleAuthProvider } from "../firebase/firebase-config";
 import { types } from "../types/types";
+import { finishLoading, startLoading } from "./ui";
 
 export const startLoginEmailPassword = (email, password) => {
   return (dispatch) => {
-    // dispatch(startLoading())
+    dispatch(startLoading());
 
     firebase
       .auth()
@@ -11,12 +14,13 @@ export const startLoginEmailPassword = (email, password) => {
       .then(({ user }) => {
         const { uid, displayName } = user;
         dispatch(login(uid, displayName));
-        // dispatch(finishLoading())
+        dispatch(finishLoading());
       })
       .catch((e) => {
         console.log(e);
-        //   dispatch(finishLoading())
+        dispatch(finishLoading());
         // TODO: CREATE ALERTS WITH SweetAlert| ALL
+        Swal.fire("Error", e.message, "error");
       });
   };
 };
@@ -32,6 +36,7 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
       })
       .catch((e) => {
         console.log(e);
+        Swal.fire("Error", e.message, "error");
       });
   };
 };
