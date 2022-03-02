@@ -23,6 +23,7 @@ const MenuScreen = () => {
   let arrayIdMenuCard = menuCard?.map((obj) => obj.id);
   const idsMenuCard = arrayIdMenuCard?.join(",");
   const { data: menuRecipes, loading } = useFetchMenuCard(idsMenuCard);
+  console.log(loading);
   // const { code, message } = menuRecipes;
 
   return (

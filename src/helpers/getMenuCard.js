@@ -6,8 +6,17 @@ export const getMenuCard = async (ids) => {
 
   const url = `https://api.spoonacular.com/recipes/informationBulk?ids=${ids}&${includeNutrition}&${apiKey}`;
 
-  const resp = await axios.get(url);
-  const { data } = await resp;
+  try {
+    const resp = await axios.get(url);
+    const { data } = await resp;
 
-  return data;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+  // const resp = await axios.get(url).then((data) => console.log(data)).catch(err) {
 };
+// const { data } = await resp;
+
+// return data;
+// };

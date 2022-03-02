@@ -15,7 +15,7 @@ export const AveragesCard = ({ menuRecipes = [] }) => {
   const findLengthOmnivore = findLength(menuRecipes, "vegan", false).length;
 
   const findAverage = (arr, prop) => {
-    if (Array.isArray(arr)) {
+    if (Array.isArray(arr) && arr.length >= 1) {
       return (
         arr.reduce((total, next) => total + next[prop], 0) / arr.length
       ).toFixed(2);
