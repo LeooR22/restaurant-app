@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 
-const RecipeSearchCard = ({
+export const RecipeCard = ({
   id,
   title,
   image,
@@ -71,5 +71,3 @@ const RecipeSearchCard = ({
     </ReactCardFlip>
   );
 };
-
-export default RecipeSearchCard;

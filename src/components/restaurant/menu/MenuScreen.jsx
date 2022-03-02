@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useFetchMenuCard } from "../../../hooks/useFetchMenuCard";
-import { Averages } from "./Averages";
-import RecipeSearchCard from "../search/RecipeSearchCard";
 import { Link } from "react-router-dom";
+
+import { AveragesCard } from "../cards/AveragesCard";
+import { RecipeCard } from "../cards/RecipeCard";
+import { useFetchMenuCard } from "../../../hooks/useFetchMenuCard";
 import { handleDeleteToMenu } from "../../../actions/menu";
 
 const MenuScreen = () => {
@@ -26,12 +27,12 @@ const MenuScreen = () => {
   return (
     <>
       <div className="mt-5 d-flex justify-content-evenly">
-        <div className="card w-25">
-          <div className="">
-            <Averages menuRecipes={menuRecipes} />
+        <div className=" w-25">
+          <div>
+            <AveragesCard menuRecipes={menuRecipes} />
           </div>
         </div>
-        <div className="card w-50">
+        <div className=" w-50">
           {loading ? (
             <div>Loading...</div>
           ) : (
@@ -40,7 +41,7 @@ const MenuScreen = () => {
                 <div className="row row-cols-2 row-cols-md-2 g-5">
                   {menuRecipes?.map((recipe) => (
                     <div key={recipe.id}>
-                      <RecipeSearchCard key={recipe.id} {...recipe} />
+                      <RecipeCard key={recipe.id} {...recipe} />
                       <div className="mt-3">
                         <Link
                           className="btn btn-success w-50 h-100"
