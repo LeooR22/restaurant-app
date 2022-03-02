@@ -1,78 +1,74 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
+import React, { useState } from "react";
+import ReactCardFlip from "react-card-flip";
 
-const RecipeSearchCard = ({ id, title, image, vegan, pricePerServing }) => {
-  // console.log(id);
-  // let menuCard = [];
+const RecipeSearchCard = ({
+  id,
+  title,
+  image,
+  vegan,
+  pricePerServing,
+  servings,
+  healthScore,
+  readyInMinutes,
+}) => {
+  const [isFlipped, setIsFlipped] = useState(false);
 
-  const handleAddToMenu = () => {
-    if (JSON.parse(window.localStorage.getItem("menuCard")) === null) {
-      let menuCard = [
-        {
-          id,
-          vegan,
-        },
-      ];
-      window.localStorage.setItem("menuCard", JSON.stringify(menuCard));
-      Swal.fire(
-        "Added !",
-        `dish ${title} has been added to the ${
-          vegan ? "vegan" : "omnivore"
-        } menu`,
-        "success"
-      );
-    } else {
-      let menuCard = JSON.parse(window.localStorage.getItem("menuCard"));
-      let menuVegan = menuCard.filter((recipe) => recipe.vegan === true);
-      let menuOmnivore = menuCard.filter((recipe) => recipe.vegan === false);
-
-      const pushToMenu = () => {
-        menuCard.push({ id, vegan });
-        window.localStorage.setItem("menuCard", JSON.stringify(menuCard));
-        console.log(menuCard);
-      };
-
-      if (
-        !(menuVegan.length < 2 && vegan === true) &&
-        !(menuOmnivore.length < 2 && vegan === false)
-      ) {
-        return Swal.fire({
-          icon: "error",
-          title: `Oops... The ${vegan ? "vegan" : "omnivore"} menu is complete`,
-          text: "if you want to change the dish, go to the beginning and delete one of the same menu",
-          footer: '<a href="">Why do I have this issue?</a>',
-        });
-      }
-
-      pushToMenu();
-      Swal.fire(
-        "Added !",
-        `dish ${title} has been added to the ${
-          vegan ? "vegan" : "omnivore"
-        } menu`,
-        "success"
-      );
-    }
+  const handleClick = () => {
+    setIsFlipped(!isFlipped);
   };
 
   return (
-    <div className="col animate__animated animate__fadeIn">
+    <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
       <div className="card h-100">
-        <img src={image} className="card-img-top" alt={title} />
+        <img
+          src={image}
+          className="card-img-top"
+          style={{ cursor: "pointer" }}
+          alt={title}
+          onClick={handleClick}
+        />
         <div className="card-body">
           <h5 className="card-title">{title}</h5>
-          <h5>Is vegan ? {vegan ? "yes" : "no"} </h5>
-          <h5>Price per serving: $ {pricePerServing}</h5>
-          <button className="btn btn-primary mb-2" onClick={handleAddToMenu}>
-            Add to menu
-          </button>
-          <Link className="btn btn-warning" to={`recipe/${id}`}>
-            See More
-          </Link>
         </div>
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item mt-2">
+            Diet: {vegan ? "Vegan" : "Omnivore"}
+          </li>
+          <li className="list-group-item mt-2">
+            Price per serving: $ {pricePerServing}
+          </li>
+        </ul>
+
+        <button className="btn btn-info w-100 mt-2" onClick={handleClick}>
+          See more
+        </button>
       </div>
-    </div>
+
+      <div className="card h-100">
+        <img
+          src={image}
+          className="card-img-top"
+          alt={title}
+          style={{ cursor: "pointer" }}
+          onClick={handleClick}
+        />
+        <div className=""></div>
+        <ul className="card-body list-group list-group-flush">
+          <li className="list-group-item">
+            Diet: {vegan ? "Vegan" : "Omnivore"}{" "}
+          </li>
+          <li className="list-group-item">
+            Price per serving: $ {pricePerServing}
+          </li>
+          <li className="list-group-item">Servings: {servings}</li>
+          <li className="list-group-item">healthScore: {healthScore}</li>
+          <li className="list-group-item">readyInMinutes: {readyInMinutes}</li>
+        </ul>
+        <button className="btn btn-warning mt-2 w-100" onClick={handleClick}>
+          See less
+        </button>
+      </div>
+    </ReactCardFlip>
   );
 };
 

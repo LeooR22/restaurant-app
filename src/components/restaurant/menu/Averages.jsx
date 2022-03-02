@@ -31,15 +31,25 @@ export const Averages = ({ menuRecipes = [] }) => {
     : 0;
 
   return (
-    <>
-      <h3>Menu Averages</h3>
-      <span className="mb-1">pricePerServing: {avgPricePerServing} </span>
-      <span className="mb-1">Servings: {totalServings}</span>
-      <span className="mb-1">
-        Total price of menu: {(avgPricePerServing * totalServings).toFixed(2)}
-      </span>
-      <span className="mb-1">healthScore average: {avgHealthScore}</span>
-      <span className="mb-1">ReadyInMinutes: {avgReadyInMinutes} </span>
-    </>
+    <div class="card">
+      <img
+        src="https://i.pinimg.com/originals/52/af/64/52af64cde4187b5f2318c970aff24c3f.jpg"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title d-flex justify-content-center">Menu Averages</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">pricePerServing: {avgPricePerServing}</li>
+        <li class="list-group-item">Servings: {totalServings}</li>
+        <li class="list-group-item">
+          Total price of menu: ${" "}
+          {(avgPricePerServing * totalServings).toFixed(2)}
+        </li>
+        <li class="list-group-item">healthScore average: {avgHealthScore}</li>
+        <li class="list-group-item">ReadyInMinutes: {avgReadyInMinutes}</li>
+      </ul>
+    </div>
   );
 };

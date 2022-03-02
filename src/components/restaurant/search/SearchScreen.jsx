@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import queryString from "query-string";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import RecipeSearchCard from "./RecipeSearchCard";
 import { useFetchRecipes } from "../../../hooks/useFetchRecipes";
 import { useForm } from "../../../hooks/useForm";
+import { handleAddToMenu } from "../../../actions/menu";
 
 export const SearchScreen = ({ history }) => {
-  const [result, setResult] = useState([]);
-
   const location = useLocation();
   const { q = "" } = queryString.parse(location.search);
   console.log(q);
@@ -59,9 +59,27 @@ export const SearchScreen = ({ history }) => {
         {loading && (
           <p className="animate__animated animate__flash mt-2">Loading...</p>
         )}
-        <div className=" row row-cols-1 row-cols-md-5 g-4 mt-2">
+        <div className=" row row-cols-1 row-cols-md-4 g-5 mt-2">
           {recipes?.map((recipe) => (
-            <RecipeSearchCard key={recipe.id} {...recipe} />
+            <div key={recipe.id}>
+              <RecipeSearchCard key={recipe.id} {...recipe} />
+              <div className="mt-3">
+                <Link
+                  className="btn btn-success w-50"
+                  to={`recipe/${recipe.id}`}
+                >
+                  See
+                  <br />
+                  Steps
+                </Link>
+                <button
+                  onClick={() => handleAddToMenu(recipe.id, recipe)}
+                  className="btn btn-primary w-50 h-100 me-"
+                >
+                  Add to Menu
+                </button>
+              </div>
+            </div>
           ))}
         </div>
       </div>

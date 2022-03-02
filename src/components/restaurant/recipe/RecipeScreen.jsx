@@ -1,9 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { getRecipeById } from "../../../helpers/getRecipeById";
 import { useFetchRecipeById } from "../../../hooks/useFetchRecipeById";
-// import getHeroById from "../../helpers/getHeroById";
 
 export const RecipeScreen = () => {
   const { recipeId } = useParams();
