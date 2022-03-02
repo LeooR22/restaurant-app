@@ -1,7 +1,18 @@
 import React from "react";
 
 export const AveragesCard = ({ menuRecipes = [] }) => {
-  console.log(menuRecipes);
+  // console.log(menuRecipes);
+
+  const findLength = (arr, prop, boolean) => {
+    if (Array.isArray(arr)) {
+      return arr.filter((arr) => arr[prop] === boolean);
+    } else {
+      return 0;
+    }
+  };
+
+  const findLengthVegan = findLength(menuRecipes, "vegan", true).length;
+  const findLengthOmnivore = findLength(menuRecipes, "vegan", false).length;
 
   const findAverage = (arr, prop) => {
     if (Array.isArray(arr)) {
@@ -47,6 +58,12 @@ export const AveragesCard = ({ menuRecipes = [] }) => {
         <li class="list-group-item">Servings: {totalServings}</li>
         <li class="list-group-item">ReadyInMinutes: {avgReadyInMinutes}</li>
         <li class="list-group-item">healthScore average: {avgHealthScore}</li>
+        <li class="list-group-item">
+          Omnivore type recipes: {findLengthOmnivore} / 2
+        </li>
+        <li class="list-group-item">
+          Vegan type recipes: {findLengthVegan} / 2
+        </li>
         <li class="list-group-item">Total price of menu: $ {totalPriceMenu}</li>
       </ul>
     </div>

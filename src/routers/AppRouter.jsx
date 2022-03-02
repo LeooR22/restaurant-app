@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Redirect, BrowserRouter as Router, Switch } from "react-router-dom";
 import { login } from "../actions/auth";
+import Loading from "../components/ui/loading/Loading";
 
 import { firebase } from "../firebase/firebase-config";
 import AuthRouter from "./AuthRouter";
@@ -31,7 +32,7 @@ const AppRouter = () => {
   }, [dispatch, setChecking, setIsLoggedIn]);
 
   if (checking) {
-    return <h1>Wait...</h1>;
+    return <Loading />;
   }
 
   return (

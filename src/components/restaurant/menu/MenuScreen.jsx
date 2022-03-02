@@ -5,6 +5,7 @@ import { AveragesCard } from "../cards/AveragesCard";
 import { RecipeCard } from "../cards/RecipeCard";
 import { useFetchMenuCard } from "../../../hooks/useFetchMenuCard";
 import { handleDeleteToMenu } from "../../../actions/menu";
+import Loading from "../../ui/loading/Loading";
 
 const MenuScreen = () => {
   const [menuCard, setMenuCard] = useState([]);
@@ -29,12 +30,12 @@ const MenuScreen = () => {
       <div className="mt-5 d-flex justify-content-evenly">
         <div className=" w-25">
           <div>
-            <AveragesCard menuRecipes={menuRecipes} />
+            {loading ? <Loading /> : <AveragesCard menuRecipes={menuRecipes} />}
           </div>
         </div>
         <div className=" w-50">
           {loading ? (
-            <div>Loading...</div>
+            <Loading />
           ) : (
             <div>
               {menuRecipes.length > 0 ? (
@@ -66,7 +67,9 @@ const MenuScreen = () => {
                   ))}
                 </div>
               ) : (
-                "Menu vacio, por favor agregue platos al menu"
+                <div className="alert alert-warning mt-2">
+                  Menu vacio, por favor agregue platos al menu
+                </div>
               )}
             </div>
           )}

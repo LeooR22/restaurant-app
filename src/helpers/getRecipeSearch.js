@@ -1,5 +1,5 @@
 export const getRecipeSearch = async (recipe) => {
-  const apiKey = "apiKey=626e07a05b334be797accd054483181a";
+  const apiKey = "apiKey=f2b26eca5f254254a8237e8785fc4bc0";
   const recipeInfo = "addRecipeInformation=true";
   const number = "number=12";
 

@@ -8,6 +8,7 @@ import { RecipeCard } from "../cards/RecipeCard";
 import { useFetchRecipes } from "../../../hooks/useFetchRecipes";
 import { useForm } from "../../../hooks/useForm";
 import { handleAddToMenu } from "../../../actions/menu";
+import Loading from "../../ui/loading/Loading";
 
 export const SearchScreen = ({ history }) => {
   const location = useLocation();
@@ -55,12 +56,10 @@ export const SearchScreen = ({ history }) => {
           </div>
         )}
         {loading === false && (
-          <h3 className="animate__animated animate__fadeIn mt-3">{q}</h3>
+          <h3 className="animate__animated animate__fadeIn mt-3 mb-4">{q}</h3>
         )}
-        {loading && (
-          <p className="animate__animated animate__flash mt-2">Loading...</p>
-        )}
-        <div className=" row row-cols-1 row-cols-md-4 g-5 mt-2">
+        {loading && <Loading />}
+        <div className=" row row-cols-1 row-cols-md-4 g-5 ">
           {recipes?.map((recipe) => (
             <div key={recipe.id}>
               <RecipeCard key={recipe.id} {...recipe} />
